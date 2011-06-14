@@ -20,22 +20,21 @@
         <small> <?php echo date('Y-m-d', strtotime($post->getDate())); ?> </small>
     </div>
 </div>
-<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+
 <div>
-   <a href="http://twitter.com/share" class="twitter-share-button"
-      data-url="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html"
-      data-via="conates"
-      data-text="Check this out!s"
-      data-related="conates_dev:The Javascript API"
-      data-count="vertical"
-      data-counturl="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html">Tweet</a>
+    <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+    <a href="http://twitter.com/share" class="twitter-share-button"
+       data-url="http://blog.recytics.com/index.php/blog/ver_post/<?php echo $post->getSlug() ?>.html"
+       data-via="conates"
+       data-text="Check this out!s"
+       data-related="conates_dev:The Javascript API"
+       data-count="vertical"
+       data-counturl="http://blog.recytics.com/index.php/blog/ver_post/<?php echo $post->getSlug() ?>.html">Tweet</a>
 </div>
 <div>
-    <div id="fb-root">
-        
-    </div>
+    <div id="fb-root"> </div>
     <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-    <fb:like href="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html" 
+    <fb:like href="http://blog.recytics.com/index.php/blog/ver_post/<?php echo $post->getSlug() ?>.html" 
              send="true" 
              width="450" 
              show_faces="true" 
