@@ -13,7 +13,7 @@
                 <br>
                 <small> <?php echo date('Y-m-d', strtotime($post->getDate())) ?> </small>
                 <br>
-                <p> <span>Número de comentarios <?php echo $post->getCountComment($post->getId()) ?> </span></p>
+                <p> <span><?php echo $post->getCountComment($post->getId()) ?> Comentarios</span></p>
                 <p> <?php echo link_to('Seguir leyendo »', '@b_post?slug=' . $post->getSlug()) ?></p>
                 <div>
 
@@ -32,8 +32,10 @@
                              send="true" 
                              width="450" 
                              show_faces="true" 
-                             font="tahoma"
-                             og:url>
+                             colorscheme="dark" 
+                             font=""
+                             layout="box_count"
+                             >
                     </fb:like>
                 </div>
             </div>

@@ -38,8 +38,9 @@
              send="true" 
              width="450" 
              show_faces="true" 
-             font="tahoma"
-             og:url>
+             colorscheme="dark" 
+             font=""
+             layout="box_count">
     </fb:like>
 </div>
 <div id="comment-new">
