@@ -35,7 +35,7 @@
                                 <form action="<?php echo url_for('@homepage') ?>"  method="get">
                                     <input id="module_search_input" class="search" type="text" title="input search" value="" name="search"/>
                                     <input type="submit" id="button_module_search" class="search" value="Buscar" />
-                                    <a href="<?php echo url_for('@homepage' . '?search=') ?>" class="cancel_search" title="Anular Búsqueda"></a>
+                                    <a href="<?php echo url_for('@homepage') ?>" class="cancel_search" title="Anular Búsqueda">Anular Búsqueda</a>
                                 </form>
                             </div>
 
