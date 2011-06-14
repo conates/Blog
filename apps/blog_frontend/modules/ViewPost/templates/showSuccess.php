@@ -20,7 +20,8 @@
         <small> <?php echo date('Y-m-d', strtotime($post->getDate())); ?> </small>
     </div>
 </div>
-
+                    <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+                    <a href="http://twitter.com/share" class="twitter-share-button">Tweet</a>
 <div id="comment-new">
 
 

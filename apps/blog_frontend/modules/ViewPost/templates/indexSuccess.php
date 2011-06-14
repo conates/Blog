@@ -14,8 +14,7 @@
                 <br>
                 <p> <span>Número de comentarios <?php echo $post->getCountComment($post->getId()) ?> </span></p>
                 <p> <?php echo link_to('Seguir leyendo »', '@b_post?slug=' . $post->getSlug()) ?></p>
-                    <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
-<a href="http://twitter.com/share" class="twitter-share-button">Tweet</a>
+
             </div>
         </div>
 
