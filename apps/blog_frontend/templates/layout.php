@@ -19,13 +19,25 @@
             <div id="navigation">
                 <div id="menu">
                     <ul>
-                        <li><?php echo link_to('Administración', '/adminBlog') ?></li>
+                        <li><?php echo link_to('Administración', '/adminBlog', array('target' => '_blank')) ?></li>
                         <?php if (!$sf_user->isAuthenticated()): ?>
                             <li><?php echo link_to('Registrate', '@register') ?></li>
 
                             <?php if (has_slot('signIn')): ?>
-                              <?php include_slot('signIn') ?>
+                                <?php include_slot('signIn') ?>
                             <?php endif; ?>
+
+
+                            <div class="module_search">
+                                <p>Buscador</p>
+                                <div class="filter_box"></div>
+                                <a class="search" title="Busqueda"></a>
+                                <form action="<?php echo url_for('@homepage') ?>"  method="get">
+                                    <input id="module_search_input" class="search" type="text" title="input search" value="" name="search"/>
+                                    <input type="submit" id="button_module_search" class="search" value="Buscar" />
+                                    <a href="<?php echo url_for('@homepage' . '?search=') ?>" class="cancel_search" title="Anular Búsqueda"></a>
+                                </form>
+                            </div>
 
                         <?php endif ?>
                         <?php if ($sf_user->isAuthenticated()): ?>

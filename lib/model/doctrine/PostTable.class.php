@@ -39,10 +39,12 @@ class PostTable extends Doctrine_Table {
         return Doctrine::getTable('Post')->findByStateAndUserId('Pendiente',sfContext::getInstance()->getUser()->getGuardUser()->getId());
     }
     
-    public function getAllPost() {
-        
-    return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado');
-        
+    public function getAllPost($search=null) {
+        if($search)
+            return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado')->addWhere('title LIKE ?','%'.$search.'%');
+        else
+         return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado');
+            
     }
 
 }

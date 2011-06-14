@@ -17,8 +17,18 @@ class ViewPostActions extends sfActions {
 //        $this->a = $query->fetchAll(PDO::FETCH_ASSOC);        
 //        die('<pre>'.print_r($this->a,1)."</pre>");
 
+
+
+    
         $this->formSign = new sfGuardFormSignin();
+    if ($request->hasParameter('search'))
+    {
+    $this->posts = Doctrine_Core::getTable('Post')->getAllPost($request->getParameter('search'));
+
+    }else{
         $this->posts = Doctrine_Core::getTable('Post')->getAllPost();
+    }
+        
 
         
         $this->pager = new sfDoctrinePager('Post',sfConfig::get('app_post_max_page'));
