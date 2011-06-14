@@ -20,8 +20,16 @@
         <small> <?php echo date('Y-m-d', strtotime($post->getDate())); ?> </small>
     </div>
 </div>
-<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html" data-text="Check this out!" data-count="horizontal" data-lang="es">Tweet</a>
-<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+<div>
+   <a href="http://twitter.com/share" class="twitter-share-button"
+      data-url="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html"
+      data-via="Anonimo"
+      data-text="Check this out!s"
+      data-related="anywhere:The Javascript API"
+      data-count="vertical"
+      data-counturl="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html">Tweet</a>
+</div>
 <div id="comment-new">
 
 
