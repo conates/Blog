@@ -41,14 +41,8 @@ class PostTable extends Doctrine_Table {
     
     public function getAllPost() {
         
-  $q = Doctrine_Query::create()
-    ->from('Post p')
-     //->execute()
-          ;
- 
-  return $q;
+    return Doctrine_Query::create()->from('Post p');;
         
-      //  return Doctrine::getTable('Post')   ->findByState('Publicado');
     }
 
 }
