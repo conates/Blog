@@ -35,11 +35,12 @@
         
     </div>
     <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-    <fb:like href="http://blog.recytics.com" 
+    <fb:like href="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html" 
              send="true" 
              width="450" 
              show_faces="true" 
-             font="tahoma">
+             font="tahoma"
+             og:url>
     </fb:like>
 </div>
 <div id="comment-new">
