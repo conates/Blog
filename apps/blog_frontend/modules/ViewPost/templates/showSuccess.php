@@ -26,9 +26,21 @@
       data-url="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html"
       data-via="conates"
       data-text="Check this out!s"
-      data-related="anywhere:The Javascript API"
+      data-related="conates_dev:The Javascript API"
       data-count="vertical"
       data-counturl="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html">Tweet</a>
+</div>
+<div>
+    <div id="fb-root">
+        
+    </div>
+    <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+    <fb:like href="http://blog.recytics.com" 
+             send="true" 
+             width="450" 
+             show_faces="true" 
+             font="tahoma">
+    </fb:like>
 </div>
 <div id="comment-new">
 
