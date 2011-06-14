@@ -20,8 +20,8 @@
         <small> <?php echo date('Y-m-d', strtotime($post->getDate())); ?> </small>
     </div>
 </div>
-                    <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
-                    <a href="http://twitter.com/share" class="twitter-share-button">Tweet</a>
+<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>" data-text="Check this out!" data-count="horizontal" data-lang="es">Tweet</a>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 <div id="comment-new">
 
 
