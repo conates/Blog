@@ -22,7 +22,7 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
         public function executeSignin($request) {
      
 
-//            parent::executeSignin($request);
+            parent::executeSignin($request);
         
             
         }

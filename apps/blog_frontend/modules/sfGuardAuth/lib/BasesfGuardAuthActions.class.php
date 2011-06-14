@@ -36,15 +36,11 @@ class BasesfGuardAuthActions extends sfActions {
                 // or to the referer
                 // or to the homepage
                 $signinUrl = sfConfig::get('app_sf_guard_plugin_success_signin_url', $user->getReferer($request->getReferer()));
-                if (strrpos($request->getReferer(), "login_error")) {
-                    return $this->redirect('@homepage');
-                }
                 return $this->redirect('' != $signinUrl ? $signinUrl : '@homepage');
             } else {
-    $this->getUser()->setFlash('error', 'Ha ocurrido un error. Se ha ingresado mal
-         el usuario y/o la contraseña, o su cuenta aún no ha sido activado.');
+                $this->getUser()->setFlash('error', 'Ha ocurrido un error. Se ha ingresado mal
+                        el usuario y/o la contraseña, o su cuenta aún no ha sido activado.');
                 return $this->redirect('@homepage');
-                
             }
         } else {
             if ($request->isXmlHttpRequest()) {

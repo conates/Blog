@@ -5,9 +5,6 @@
 register_success:
   url:   /blog/register_success
   param: { module: Register, action: success }
-login_error:
-  url:   /blog/login_error
-  param: { module: sfGuardAuth, action: error }
   
 register:
   url:   /blog/register

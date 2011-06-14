@@ -23,9 +23,9 @@
                         <?php if (!$sf_user->isAuthenticated()): ?>
                             <li><?php echo link_to('Registrate', '@register') ?></li>
 
-<?php if (has_slot('signIn')): ?>
-  <?php include_slot('signIn') ?>
-<?php endif; ?>
+                            <?php if (has_slot('signIn')): ?>
+                              <?php include_slot('signIn') ?>
+                            <?php endif; ?>
 
                         <?php endif ?>
                         <?php if ($sf_user->isAuthenticated()): ?>
