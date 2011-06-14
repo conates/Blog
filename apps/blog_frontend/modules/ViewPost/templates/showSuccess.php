@@ -24,7 +24,7 @@
 <div>
    <a href="http://twitter.com/share" class="twitter-share-button"
       data-url="http://blog.recytics.com/index.php/blog/ver_post/<?php echo  $post->getSlug() ?>.html"
-      data-via="Anonimo"
+      data-via="conates"
       data-text="Check this out!s"
       data-related="anywhere:The Javascript API"
       data-count="vertical"
