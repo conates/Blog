@@ -1,0 +1,111 @@
+body {margin:0 auto;padding:0;background-color: #eee; width: 1024px;}
+a {color:#466773;}.clear {clear:both;}
+.submit-login{
+    text-decoration:underline;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color:#006edd;
+    font-size: 11px;
+}
+#logo{
+    float: left;
+}
+#login{
+    float: right;
+}
+#signin_username, #signin_password{
+    width: 118px;
+    height: 25px;
+
+}
+#centro{
+    width: 1024px;
+    height: 260px;
+    float: left;
+    margin-left: 130px;
+    margin-top: 150px;
+}
+#central{
+
+    width: 512px;
+    height: 260px;
+    background-image: url('../images/imagen_principal.png');
+    float: left;
+    margin-right: 20px;
+}
+#shimano{
+    width: 262px;
+    height: 260px;
+    background-image: url('../images/shimano_principal.png');
+    float: right;
+    margin-left: 20px;
+}
+
+label.error { 
+    background: url("../images/warning.png") no-repeat scroll 0 0 transparent;
+    float: none; 
+    color: red; 
+    padding-left: 1.5em; 
+    vertical-align: top;    
+}
+#comment-new table { 
+    width: 500px;
+}
+
+
+#wrapper {
+    width: 1024px;
+    margin: 0 auto;
+
+}
+#header {
+    float: none;
+    width: 100%;
+    height: 150px;
+    position: relative;
+    background-image: url(http://www.biketreks.net/images/ShimanoBanner.jpg);
+    background-repeat: no-repeat-x;
+}
+#menu{
+    margin: 0 auto;
+    width: 250px;
+    float: left;
+}
+#content {
+    float: right;
+    width: 70%;
+    height: 100%;
+    position: relative;
+}
+#navigation {
+    float: left;
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    padding-right: 30px;
+}
+#footer {
+    clear: both;
+    width: 100%;
+    height: 150px;
+    position: relative;
+    background-color: #555555;
+}
+.error{
+    background: url("../images/error.png") no-repeat scroll 0 0 #FFCCCC;
+    border: 1px solid #FF0000;
+    border-radius: 5px 5px 5px 5px;
+    color: #000000;
+    float: left;
+    font-family: arial;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: normal;
+    margin: 3px 0;
+    padding: 10px 8px 7px 27px;
+    width: 97%;
+}
+#menu-categorias{
+    width: 300px;
+}

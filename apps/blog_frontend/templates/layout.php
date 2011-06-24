@@ -38,7 +38,6 @@
                                     <a href="<?php echo url_for('@homepage') ?>" class="cancel_search" title="Anular Búsqueda">Anular Búsqueda</a>
                                 </form>
                             </div>
-
                         <?php endif ?>
                         <?php if ($sf_user->isAuthenticated()): ?>
                             <li><a class="last logout" href="<?php echo url_for('@sf_guard_signout') ?>">Logout</a></li>

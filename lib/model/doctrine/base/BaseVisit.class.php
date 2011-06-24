@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Visit', 'doctrine');
 
 /**
  * BaseVisit
@@ -7,13 +9,13 @@
  * 
  * @property integer $id
  * @property string $ip
- * @property date $date
+ * @property string $date
  * @property integer $post_id
  * @property Post $Post
  * 
  * @method integer getId()      Returns the current record's "id" value
  * @method string  getIp()      Returns the current record's "ip" value
- * @method date    getDate()    Returns the current record's "date" value
+ * @method string  getDate()    Returns the current record's "date" value
  * @method integer getPostId()  Returns the current record's "post_id" value
  * @method Post    getPost()    Returns the current record's "Post" value
  * @method Visit   setId()      Sets the current record's "id" value
@@ -32,29 +34,41 @@ abstract class BaseVisit extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('visit');
-        $this->hasColumn('id', 'integer', 8, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
-             'autoincrement' => true,
+             'fixed' => 0,
+             'unsigned' => false,
              'primary' => true,
-             'length' => 8,
+             'autoincrement' => true,
+             'length' => 4,
              ));
         $this->hasColumn('ip', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
-        $this->hasColumn('date', 'date', null, array(
-             'type' => 'date',
+        $this->hasColumn('date', 'string', 10, array(
+             'type' => 'string',
+             'fixed' => 1,
+             'unsigned' => false,
              'notnull' => false,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 10,
              ));
-        $this->hasColumn('post_id', 'integer', 8, array(
+        $this->hasColumn('post_id', 'integer', 4, array(
              'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
-             'length' => 8,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 4,
              ));
-
-        $this->option('collate', 'utf8_unicode_ci');
-        $this->option('charset', 'utf8');
     }
 
     public function setUp()

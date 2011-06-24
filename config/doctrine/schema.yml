@@ -1,70 +1,367 @@
-options:
-  collate: utf8_unicode_ci
-  charset: utf8
-
-
-Post:
-  actAs:
-    Timestampable: ~
-    Searchable: { unique: true, fields: [title,content,state], canUpdate: true }
-    Sluggable:  { unique: true, fields: [title], canUpdate: true }
-  columns:
-    id:                   { type: integer(8), autoincrement: true, primary: true }
-    title:                { type: string(150), notnull: true }
-    content:              { type: string(50000), notnull: true }
-    date:                 { type: timestamp, notnull: true } 
-    state:                { type: enum, values: ['Publicado','Borrador', 'Pendiente']}
-    user_id:              { type: integer(4), notnull: false }
-  attributes: { export: all,  validate: true }
-
-Comment:
-  actAs:
-    Timestampable: ~
-  columns:
-    id:                   { type: integer(8), autoincrement: true, primary: true }
-    name:                 { type: string(150), notnull: true }
-    email:                { type: string(150), notnull: true }    
-    url:                  { type: string(150), notnull: true }    
-    comment:              { type: string(1000), notnull: true }
-    state:                { type: enum, values: ['Publicado','Pendiente']}
-    user_id:              { type: integer(4), notnull: true }
-    post_id:              { type: integer(8), notnull: true }
-  relations: 
-    Post: { foreignAlias: Comments }
-    
-Tag:
-  columns:
-    id:                   { type: integer(8), autoincrement: true, primary: true }
-    name:                 { type: string(150), notnull: true }
-    description:          { type: string(1000), notnull: false }
-  relations: 
-    Posts: { foreignAlias: Tags , class: Post , refClass: PostTag }
-
-PostCategory:
-  columns:
-    post_id:      { type: integer(8) ,  primary: true }
-    category_id:  { type: integer(8) ,  primary: true }
-  relations:
-    Post:     {   foreignAlias: PostCategorys }
-    Category: {   foreignAlias: PostCategorys }
-
-PostTag:
-  columns:
-    post_id:      { type: integer(8) ,  primary: true }
-    tag_id:       { type: integer(8) ,  primary: true }
-  relations:
-    Post:     {   foreignAlias: PostTags }
-    Tag:      {   foreignAlias: PostTags }
-
-
 Category:
+  connection: doctrine
+  tableName: category
   columns:
-    id:                   { type: integer(8), autoincrement: true, primary: true }
-    name:                 { type: string(150), notnull: true }
-    description:          { type: string(1000), notnull: false }
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    description:
+      type: string(1000)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
   relations:
-    Posts: { foreignAlias: Categories , class: Post , refClass: PostCategory }
-
+    PostCategory:
+      local: id
+      foreign: category_id
+      type: many
+Client:
+  connection: doctrine
+  tableName: client
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    first_name:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    last_name:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    email_address:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    address:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    number:
+      type: string(8)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    city:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    commune:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    username:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    password:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    user_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    user_type:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+Comment:
+  connection: doctrine
+  tableName: comment
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    email:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    url:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    comment:
+      type: string(1000)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    state:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    user_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    post_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    created_at:
+      type: string(19)
+      fixed: true
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    updated_at:
+      type: string(19)
+      fixed: true
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+  relations:
+    Post:
+      local: post_id
+      foreign: id
+      type: one
+Post:
+  connection: doctrine
+  tableName: post
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    title:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    content:
+      type: string(2147483647)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    date:
+      type: string(19)
+      fixed: true
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    state:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    user_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    created_at:
+      type: string(19)
+      fixed: true
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    updated_at:
+      type: string(19)
+      fixed: true
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    slug:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+  relations:
+    Comment:
+      local: id
+      foreign: post_id
+      type: many
+    PostCategory:
+      local: id
+      foreign: post_id
+      type: many
+    PostIndex:
+      local: id
+      foreign: id
+      type: many
+    PostTag:
+      local: id
+      foreign: post_id
+      type: many
+    Visit:
+      local: id
+      foreign: post_id
+      type: many
+PostCategory:
+  connection: doctrine
+  tableName: post_category
+  columns:
+    post_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    category_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    Category:
+      local: category_id
+      foreign: id
+      type: one
+    Post:
+      local: post_id
+      foreign: id
+      type: one
+PostIndex:
+  connection: doctrine
+  tableName: post_index
+  columns:
+    keyword:
+      type: string(200)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    field:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    position:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    Post:
+      local: id
+      foreign: id
+      type: one
+PostTag:
+  connection: doctrine
+  tableName: post_tag
+  columns:
+    post_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    tag_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    Post:
+      local: post_id
+      foreign: id
+      type: one
+    Tag:
+      local: tag_id
+      foreign: id
+      type: one
 
 sfGuardUser:
   actAs: [Timestampable]
@@ -87,28 +384,437 @@ sfGuardUser:
     Comment:      { local: id ,foreign: user_id , type: one, class: Comment }
     Post:         { local: id ,foreign: user_id , type: one, class: Post }
     Client:       { local: id ,foreign: user_id , type: one, class: Client }
-
-Visit:
+Tag:
+  connection: doctrine
+  tableName: tag
   columns:
-    id:            { type: integer(8), autoincrement: true, primary: true }
-    ip:            { type: string(150), notnull: true }
-    date:          { type: date, notnull: false }
-    post_id:       { type: integer(8), notnull: true }
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    name:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    description:
+      type: string(1000)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+  relations:
+    PostTag:
+      local: id
+      foreign: tag_id
+      type: many
+Tb_ArticuloCategoria:
+  connection: doctrine
+  tableName: tb_ArticuloCategoria
+  columns:
+    idallgestempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idarticulo:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idcategoria:
+      type: float(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idaccesorio:
+      type: float(7)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+Tb_Articulos:
+  connection: doctrine
+  tableName: tb_Articulos
+  columns:
+    idallgestempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+      default: 2
+    idempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+      default: 1
+    idarticulo:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idcategoria:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    idaccesorio:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    nombreweb:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    textoweb:
+      type: string(500)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    modelo:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    marca:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    imagen:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    idgrupoarticulo:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    idsubgrupoarticulo:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    siactivadoweb:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    idestado:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    idestadoventas:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    precioventa:
+      type: float(20)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+Tb_CatalogoAccesorios:
+  connection: doctrine
+  tableName: tb_CatalogoAccesorios
+  columns:
+    idallgestempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idcategoria:
+      type: float(20)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idaccesorio:
+      type: float(7)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    nombre:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    siacivadoweb:
+      type: float(20)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    nombreweb:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+Tb_CatalogoCategoria:
+  connection: doctrine
+  tableName: tb_CatalogoCategoria
+  columns:
+    idallgestempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idempresa:
+      type: float(12)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idcategoria:
+      type: float(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    nombre:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    siacivadoweb:
+      type: float(20)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+Tb_ClienteEmpresa:
+  connection: doctrine
+  tableName: tb_ClienteEmpresa
+  columns:
+    idallgestempresa:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idempresa:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    idcliente:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    correlativo:
+      type: string(45)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    giro:
+      type: string(60)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    fono:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    celular:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    fax:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    email:
+      type: string(45)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    siclienteweb:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    claveweb:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+Tb_OfertasPorArticulo:
+  connection: doctrine
+  tableName: tb_OfertasPorArticulo
+  columns:
+    idallgestempresa:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+      default: 2
+    idempresa:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+      default: 1
+    idarticulo:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    correlativooferta:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    bultooferta:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    preciooferta:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    fechaactualizacion:
+      type: string(19)
+      fixed: true
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    idusuario:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+Visit:
+  connection: doctrine
+  tableName: visit
+  columns:
+    id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    ip:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+    date:
+      type: string(10)
+      fixed: true
+      unsigned: false
+      notnull: false
+      primary: false
+      autoincrement: false
+    post_id:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
   relations:
     Post:
-      foreignAlias: Posts
-
-Client:
-  columns:
-    id:               { type: integer(8), autoincrement: true, primary: true }
-    first_name:       { type: string(150), notnull: true }
-    last_name:        { type: string(150), notnull: true }
-    email_address:    { type: string(150), notnull: true }
-    address:          { type: string(150), notnull: true }
-    number:           { type: string(8), notnull: true }
-    city:             { type: string(150), notnull: true }
-    commune:          { type: string(150), notnull: true }
-    username:         { type: string(150), notnull: true }
-    password:         { type: string(150), notnull: true }
-    user_id:          { type: integer(8), notnull: true }
-    user_type:        { type: enum, values: ['Web','Blog', 'Web-Blog']}
+      local: post_id
+      foreign: id
+      type: one

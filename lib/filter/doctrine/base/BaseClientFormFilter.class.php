@@ -23,7 +23,7 @@ abstract class BaseClientFormFilter extends BaseFormFilterDoctrine
       'username'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'password'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'user_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => true)),
-      'user_type'     => new sfWidgetFormChoice(array('choices' => array('' => '', 'Web' => 'Web', 'Blog' => 'Blog', 'Web-Blog' => 'Web-Blog'))),
+      'user_type'     => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -37,7 +37,7 @@ abstract class BaseClientFormFilter extends BaseFormFilterDoctrine
       'username'      => new sfValidatorPass(array('required' => false)),
       'password'      => new sfValidatorPass(array('required' => false)),
       'user_id'       => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('sfGuardUser'), 'column' => 'id')),
-      'user_type'     => new sfValidatorChoice(array('required' => false, 'choices' => array('Web' => 'Web', 'Blog' => 'Blog', 'Web-Blog' => 'Web-Blog'))),
+      'user_type'     => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('client_filters[%s]');
@@ -68,7 +68,7 @@ abstract class BaseClientFormFilter extends BaseFormFilterDoctrine
       'username'      => 'Text',
       'password'      => 'Text',
       'user_id'       => 'ForeignKey',
-      'user_type'     => 'Enum',
+      'user_type'     => 'Text',
     );
   }
 }

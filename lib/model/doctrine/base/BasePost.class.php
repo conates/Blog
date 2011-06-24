@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Post', 'doctrine');
 
 /**
  * BasePost
@@ -8,43 +10,49 @@
  * @property integer $id
  * @property string $title
  * @property string $content
- * @property timestamp $date
- * @property enum $state
+ * @property string $date
+ * @property string $state
  * @property integer $user_id
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $slug
+ * @property Doctrine_Collection $Comment
+ * @property Doctrine_Collection $PostCategory
+ * @property Doctrine_Collection $PostIndex
+ * @property Doctrine_Collection $PostTag
+ * @property Doctrine_Collection $Visit
  * @property Doctrine_Collection $sfGuardUser
- * @property Doctrine_Collection $Comments
- * @property Doctrine_Collection $Tags
- * @property Doctrine_Collection $PostCategorys
- * @property Doctrine_Collection $PostTags
- * @property Doctrine_Collection $Categories
- * @property Doctrine_Collection $Posts
  * 
- * @method integer             getId()            Returns the current record's "id" value
- * @method string              getTitle()         Returns the current record's "title" value
- * @method string              getContent()       Returns the current record's "content" value
- * @method timestamp           getDate()          Returns the current record's "date" value
- * @method enum                getState()         Returns the current record's "state" value
- * @method integer             getUserId()        Returns the current record's "user_id" value
- * @method Doctrine_Collection getSfGuardUser()   Returns the current record's "sfGuardUser" collection
- * @method Doctrine_Collection getComments()      Returns the current record's "Comments" collection
- * @method Doctrine_Collection getTags()          Returns the current record's "Tags" collection
- * @method Doctrine_Collection getPostCategorys() Returns the current record's "PostCategorys" collection
- * @method Doctrine_Collection getPostTags()      Returns the current record's "PostTags" collection
- * @method Doctrine_Collection getCategories()    Returns the current record's "Categories" collection
- * @method Doctrine_Collection getPosts()         Returns the current record's "Posts" collection
- * @method Post                setId()            Sets the current record's "id" value
- * @method Post                setTitle()         Sets the current record's "title" value
- * @method Post                setContent()       Sets the current record's "content" value
- * @method Post                setDate()          Sets the current record's "date" value
- * @method Post                setState()         Sets the current record's "state" value
- * @method Post                setUserId()        Sets the current record's "user_id" value
- * @method Post                setSfGuardUser()   Sets the current record's "sfGuardUser" collection
- * @method Post                setComments()      Sets the current record's "Comments" collection
- * @method Post                setTags()          Sets the current record's "Tags" collection
- * @method Post                setPostCategorys() Sets the current record's "PostCategorys" collection
- * @method Post                setPostTags()      Sets the current record's "PostTags" collection
- * @method Post                setCategories()    Sets the current record's "Categories" collection
- * @method Post                setPosts()         Sets the current record's "Posts" collection
+ * @method integer             getId()           Returns the current record's "id" value
+ * @method string              getTitle()        Returns the current record's "title" value
+ * @method string              getContent()      Returns the current record's "content" value
+ * @method string              getDate()         Returns the current record's "date" value
+ * @method string              getState()        Returns the current record's "state" value
+ * @method integer             getUserId()       Returns the current record's "user_id" value
+ * @method string              getCreatedAt()    Returns the current record's "created_at" value
+ * @method string              getUpdatedAt()    Returns the current record's "updated_at" value
+ * @method string              getSlug()         Returns the current record's "slug" value
+ * @method Doctrine_Collection getComment()      Returns the current record's "Comment" collection
+ * @method Doctrine_Collection getPostCategory() Returns the current record's "PostCategory" collection
+ * @method Doctrine_Collection getPostIndex()    Returns the current record's "PostIndex" collection
+ * @method Doctrine_Collection getPostTag()      Returns the current record's "PostTag" collection
+ * @method Doctrine_Collection getVisit()        Returns the current record's "Visit" collection
+ * @method Doctrine_Collection getSfGuardUser()  Returns the current record's "sfGuardUser" collection
+ * @method Post                setId()           Sets the current record's "id" value
+ * @method Post                setTitle()        Sets the current record's "title" value
+ * @method Post                setContent()      Sets the current record's "content" value
+ * @method Post                setDate()         Sets the current record's "date" value
+ * @method Post                setState()        Sets the current record's "state" value
+ * @method Post                setUserId()       Sets the current record's "user_id" value
+ * @method Post                setCreatedAt()    Sets the current record's "created_at" value
+ * @method Post                setUpdatedAt()    Sets the current record's "updated_at" value
+ * @method Post                setSlug()         Sets the current record's "slug" value
+ * @method Post                setComment()      Sets the current record's "Comment" collection
+ * @method Post                setPostCategory() Sets the current record's "PostCategory" collection
+ * @method Post                setPostIndex()    Sets the current record's "PostIndex" collection
+ * @method Post                setPostTag()      Sets the current record's "PostTag" collection
+ * @method Post                setVisit()        Sets the current record's "Visit" collection
+ * @method Post                setSfGuardUser()  Sets the current record's "sfGuardUser" collection
  * 
  * @package    Blog
  * @subpackage model
@@ -56,103 +64,113 @@ abstract class BasePost extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('post');
-        $this->hasColumn('id', 'integer', 8, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
-             'autoincrement' => true,
+             'fixed' => 0,
+             'unsigned' => false,
              'primary' => true,
-             'length' => 8,
+             'autoincrement' => true,
+             'length' => 4,
              ));
         $this->hasColumn('title', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
-        $this->hasColumn('content', 'string', 50000, array(
+        $this->hasColumn('content', 'string', 2147483647, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
-             'length' => 50000,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 2147483647,
              ));
-        $this->hasColumn('date', 'timestamp', null, array(
-             'type' => 'timestamp',
+        $this->hasColumn('date', 'string', 19, array(
+             'type' => 'string',
+             'fixed' => 1,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 19,
              ));
-        $this->hasColumn('state', 'enum', null, array(
-             'type' => 'enum',
-             'values' => 
-             array(
-              0 => 'Publicado',
-              1 => 'Borrador',
-              2 => 'Pendiente',
-             ),
+        $this->hasColumn('state', 'string', 255, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'notnull' => false,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 255,
              ));
         $this->hasColumn('user_id', 'integer', 4, array(
              'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => false,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 4,
              ));
-
-
-        $this->setAttribute(Doctrine_Core::ATTR_EXPORT, Doctrine_Core::EXPORT_ALL);
-        $this->setAttribute(Doctrine_Core::ATTR_VALIDATE, true);
-
-        $this->option('collate', 'utf8_unicode_ci');
-        $this->option('charset', 'utf8');
+        $this->hasColumn('created_at', 'string', 19, array(
+             'type' => 'string',
+             'fixed' => 1,
+             'unsigned' => false,
+             'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 19,
+             ));
+        $this->hasColumn('updated_at', 'string', 19, array(
+             'type' => 'string',
+             'fixed' => 1,
+             'unsigned' => false,
+             'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 19,
+             ));
+        $this->hasColumn('slug', 'string', 255, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'notnull' => false,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 255,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Comment', array(
+             'local' => 'id',
+             'foreign' => 'post_id'));
+
+        $this->hasMany('PostCategory', array(
+             'local' => 'id',
+             'foreign' => 'post_id'));
+
+        $this->hasMany('PostIndex', array(
+             'local' => 'id',
+             'foreign' => 'id'));
+
+        $this->hasMany('PostTag', array(
+             'local' => 'id',
+             'foreign' => 'post_id'));
+
+        $this->hasMany('Visit', array(
+             'local' => 'id',
+             'foreign' => 'post_id'));
+
         $this->hasMany('sfGuardUser', array(
              'local' => 'user_id',
              'foreign' => 'id'));
-
-        $this->hasMany('Comment as Comments', array(
-             'local' => 'id',
-             'foreign' => 'post_id'));
-
-        $this->hasMany('Tag as Tags', array(
-             'refClass' => 'PostTag',
-             'local' => 'post_id',
-             'foreign' => 'tag_id'));
-
-        $this->hasMany('PostCategory as PostCategorys', array(
-             'local' => 'id',
-             'foreign' => 'post_id'));
-
-        $this->hasMany('PostTag as PostTags', array(
-             'local' => 'id',
-             'foreign' => 'post_id'));
-
-        $this->hasMany('Category as Categories', array(
-             'refClass' => 'PostCategory',
-             'local' => 'post_id',
-             'foreign' => 'category_id'));
-
-        $this->hasMany('Visit as Posts', array(
-             'local' => 'id',
-             'foreign' => 'post_id'));
-
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $searchable0 = new Doctrine_Template_Searchable(array(
-             'unique' => true,
-             'fields' => 
-             array(
-              0 => 'title',
-              1 => 'content',
-              2 => 'state',
-             ),
-             'canUpdate' => true,
-             ));
-        $sluggable0 = new Doctrine_Template_Sluggable(array(
-             'unique' => true,
-             'fields' => 
-             array(
-              0 => 'title',
-             ),
-             'canUpdate' => true,
-             ));
-        $this->actAs($timestampable0);
-        $this->actAs($searchable0);
-        $this->actAs($sluggable0);
     }
 }

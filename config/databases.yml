@@ -5,11 +5,12 @@ all:
   doctrine:
     class: sfDoctrineDatabase
     param:
-#      dsn:      dblib:host=190.54.24.130;port=1433;dbname=SAP_Prueba
-#      username: sapweb
-#      password: websap,.2011
+      dsn:      dblib:host=190.54.24.130;port=1433;dbname=SAP_Prueba
+      username: sapweb
+      password: websap,.2011
 
 
-      dsn:      mysql:host=localhost;dbname=shimano
-      username: root
-      password: moscon
+#      dsn:      mysql:host=localhost;dbname=shimano
+#      username: root
+#      password: moscon
+

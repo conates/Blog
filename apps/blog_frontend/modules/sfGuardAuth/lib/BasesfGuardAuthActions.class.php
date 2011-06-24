@@ -29,6 +29,7 @@ class BasesfGuardAuthActions extends sfActions {
         if ($request->isMethod('post')) {
             $this->form->bind($request->getParameter('signin'));
             if ($this->form->isValid()) {
+
                 $values = $this->form->getValues();
                 $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
 

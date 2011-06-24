@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Comment', 'doctrine');
 
 /**
  * BaseComment
@@ -10,9 +12,11 @@
  * @property string $email
  * @property string $url
  * @property string $comment
- * @property enum $state
+ * @property string $state
  * @property integer $user_id
  * @property integer $post_id
+ * @property string $created_at
+ * @property string $updated_at
  * @property Post $Post
  * @property Doctrine_Collection $sfGuardUser
  * 
@@ -21,9 +25,11 @@
  * @method string              getEmail()       Returns the current record's "email" value
  * @method string              getUrl()         Returns the current record's "url" value
  * @method string              getComment()     Returns the current record's "comment" value
- * @method enum                getState()       Returns the current record's "state" value
+ * @method string              getState()       Returns the current record's "state" value
  * @method integer             getUserId()      Returns the current record's "user_id" value
  * @method integer             getPostId()      Returns the current record's "post_id" value
+ * @method string              getCreatedAt()   Returns the current record's "created_at" value
+ * @method string              getUpdatedAt()   Returns the current record's "updated_at" value
  * @method Post                getPost()        Returns the current record's "Post" value
  * @method Doctrine_Collection getSfGuardUser() Returns the current record's "sfGuardUser" collection
  * @method Comment             setId()          Sets the current record's "id" value
@@ -34,6 +40,8 @@
  * @method Comment             setState()       Sets the current record's "state" value
  * @method Comment             setUserId()      Sets the current record's "user_id" value
  * @method Comment             setPostId()      Sets the current record's "post_id" value
+ * @method Comment             setCreatedAt()   Sets the current record's "created_at" value
+ * @method Comment             setUpdatedAt()   Sets the current record's "updated_at" value
  * @method Comment             setPost()        Sets the current record's "Post" value
  * @method Comment             setSfGuardUser() Sets the current record's "sfGuardUser" collection
  * 
@@ -47,53 +55,95 @@ abstract class BaseComment extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('comment');
-        $this->hasColumn('id', 'integer', 8, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
-             'autoincrement' => true,
+             'fixed' => 0,
+             'unsigned' => false,
              'primary' => true,
-             'length' => 8,
+             'autoincrement' => true,
+             'length' => 4,
              ));
         $this->hasColumn('name', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('email', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('url', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('comment', 'string', 1000, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 1000,
              ));
-        $this->hasColumn('state', 'enum', null, array(
-             'type' => 'enum',
-             'values' => 
-             array(
-              0 => 'Publicado',
-              1 => 'Pendiente',
-             ),
+        $this->hasColumn('state', 'string', 255, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'notnull' => false,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 255,
              ));
         $this->hasColumn('user_id', 'integer', 4, array(
              'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 4,
              ));
-        $this->hasColumn('post_id', 'integer', 8, array(
+        $this->hasColumn('post_id', 'integer', 4, array(
              'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
-             'length' => 8,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 4,
              ));
-
-        $this->option('collate', 'utf8_unicode_ci');
-        $this->option('charset', 'utf8');
+        $this->hasColumn('created_at', 'string', 19, array(
+             'type' => 'string',
+             'fixed' => 1,
+             'unsigned' => false,
+             'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 19,
+             ));
+        $this->hasColumn('updated_at', 'string', 19, array(
+             'type' => 'string',
+             'fixed' => 1,
+             'unsigned' => false,
+             'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 19,
+             ));
     }
 
     public function setUp()
@@ -106,8 +156,5 @@ abstract class BaseComment extends sfDoctrineRecord
         $this->hasMany('sfGuardUser', array(
              'local' => 'user_id',
              'foreign' => 'id'));
-
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($timestampable0);
     }
 }

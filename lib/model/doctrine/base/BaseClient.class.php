@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Client', 'doctrine');
 
 /**
  * BaseClient
@@ -16,7 +18,7 @@
  * @property string $username
  * @property string $password
  * @property integer $user_id
- * @property enum $user_type
+ * @property string $user_type
  * @property Doctrine_Collection $sfGuardUser
  * 
  * @method integer             getId()            Returns the current record's "id" value
@@ -30,7 +32,7 @@
  * @method string              getUsername()      Returns the current record's "username" value
  * @method string              getPassword()      Returns the current record's "password" value
  * @method integer             getUserId()        Returns the current record's "user_id" value
- * @method enum                getUserType()      Returns the current record's "user_type" value
+ * @method string              getUserType()      Returns the current record's "user_type" value
  * @method Doctrine_Collection getSfGuardUser()   Returns the current record's "sfGuardUser" collection
  * @method Client              setId()            Sets the current record's "id" value
  * @method Client              setFirstName()     Sets the current record's "first_name" value
@@ -56,74 +58,113 @@ abstract class BaseClient extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('client');
-        $this->hasColumn('id', 'integer', 8, array(
+        $this->hasColumn('id', 'integer', 4, array(
              'type' => 'integer',
-             'autoincrement' => true,
+             'fixed' => 0,
+             'unsigned' => false,
              'primary' => true,
-             'length' => 8,
+             'autoincrement' => true,
+             'length' => 4,
              ));
         $this->hasColumn('first_name', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('last_name', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('email_address', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('address', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('number', 'string', 8, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 8,
              ));
         $this->hasColumn('city', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('commune', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('username', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('password', 'string', 150, array(
              'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
+             'primary' => false,
+             'autoincrement' => false,
              'length' => 150,
              ));
-        $this->hasColumn('user_id', 'integer', 8, array(
+        $this->hasColumn('user_id', 'integer', 4, array(
              'type' => 'integer',
+             'fixed' => 0,
+             'unsigned' => false,
              'notnull' => true,
-             'length' => 8,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 4,
              ));
-        $this->hasColumn('user_type', 'enum', null, array(
-             'type' => 'enum',
-             'values' => 
-             array(
-              0 => 'Web',
-              1 => 'Blog',
-              2 => 'Web-Blog',
-             ),
+        $this->hasColumn('user_type', 'string', 255, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'notnull' => false,
+             'primary' => false,
+             'autoincrement' => false,
+             'length' => 255,
              ));
-
-        $this->option('collate', 'utf8_unicode_ci');
-        $this->option('charset', 'utf8');
     }
 
     public function setUp()
