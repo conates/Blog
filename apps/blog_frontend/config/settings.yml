@@ -27,6 +27,7 @@ all:
     # Form security secret (CSRF protection)
     csrf_secret:            a2509c6ad93578f19ba31a9e3c2146d85a9dd894
     enabled_modules:      [default, sfGuardAuth, sfGuardUser,sfGuardRegister]
+    standard_helpers: [Partial, Cache, I18N, Date]
     # Output escaping settings
     escaping_strategy:      true
     escaping_method:        ESC_SPECIALCHARS

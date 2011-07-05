@@ -148,6 +148,9 @@ abstract class BaseTb_ClienteEmpresa extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 15,
              ));
+
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()

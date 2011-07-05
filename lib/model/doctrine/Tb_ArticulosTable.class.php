@@ -16,14 +16,14 @@ class Tb_ArticulosTable extends Doctrine_Table {
         return Doctrine_Core::getTable('Tb_Articulos');
     }
 
-    public function getAllArticulo($categoria=null, $accesorio=null) {
+    public function getAllArticuloMoto($categoria=null, $accesorio=null) {
 
 
         if (!$categoria == null && !$accesorio == null) {
 
             $doctrine = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
             $query = $doctrine->query("
-                exec sp_WEB_ConsultaArticulosPorGrupo 
+                exec sp_WEB_ConsultaArticulosPorGrupo
                 @IDAllgestEmpresa=N'2',
                 @IDEmpresa=N'1',
                 @TextoBuscar=N'',

@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('PostCategory', 'doctrine');
 
 /**
  * BasePostCategory
@@ -9,17 +7,17 @@ Doctrine_Manager::getInstance()->bindComponent('PostCategory', 'doctrine');
  * 
  * @property integer $post_id
  * @property integer $category_id
- * @property Category $Category
  * @property Post $Post
+ * @property Category $Category
  * 
  * @method integer      getPostId()      Returns the current record's "post_id" value
  * @method integer      getCategoryId()  Returns the current record's "category_id" value
- * @method Category     getCategory()    Returns the current record's "Category" value
  * @method Post         getPost()        Returns the current record's "Post" value
+ * @method Category     getCategory()    Returns the current record's "Category" value
  * @method PostCategory setPostId()      Sets the current record's "post_id" value
  * @method PostCategory setCategoryId()  Sets the current record's "category_id" value
- * @method PostCategory setCategory()    Sets the current record's "Category" value
  * @method PostCategory setPost()        Sets the current record's "Post" value
+ * @method PostCategory setCategory()    Sets the current record's "Category" value
  * 
  * @package    Blog
  * @subpackage model
@@ -31,33 +29,30 @@ abstract class BasePostCategory extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('post_category');
-        $this->hasColumn('post_id', 'integer', 4, array(
+        $this->hasColumn('post_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
              'primary' => true,
-             'autoincrement' => false,
-             'length' => 4,
+             'length' => 8,
              ));
-        $this->hasColumn('category_id', 'integer', 4, array(
+        $this->hasColumn('category_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
              'primary' => true,
-             'autoincrement' => false,
-             'length' => 4,
+             'length' => 8,
              ));
+
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Category', array(
-             'local' => 'category_id',
-             'foreign' => 'id'));
-
         $this->hasOne('Post', array(
              'local' => 'post_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('Category', array(
+             'local' => 'category_id',
              'foreign' => 'id'));
     }
 }

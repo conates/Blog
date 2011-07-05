@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('Category', 'doctrine');
 
 /**
  * BaseCategory
@@ -10,16 +8,19 @@ Doctrine_Manager::getInstance()->bindComponent('Category', 'doctrine');
  * @property integer $id
  * @property string $name
  * @property string $description
- * @property Doctrine_Collection $PostCategory
+ * @property Doctrine_Collection $Posts
+ * @property Doctrine_Collection $PostCategorys
  * 
- * @method integer             getId()           Returns the current record's "id" value
- * @method string              getName()         Returns the current record's "name" value
- * @method string              getDescription()  Returns the current record's "description" value
- * @method Doctrine_Collection getPostCategory() Returns the current record's "PostCategory" collection
- * @method Category            setId()           Sets the current record's "id" value
- * @method Category            setName()         Sets the current record's "name" value
- * @method Category            setDescription()  Sets the current record's "description" value
- * @method Category            setPostCategory() Sets the current record's "PostCategory" collection
+ * @method integer             getId()            Returns the current record's "id" value
+ * @method string              getName()          Returns the current record's "name" value
+ * @method string              getDescription()   Returns the current record's "description" value
+ * @method Doctrine_Collection getPosts()         Returns the current record's "Posts" collection
+ * @method Doctrine_Collection getPostCategorys() Returns the current record's "PostCategorys" collection
+ * @method Category            setId()            Sets the current record's "id" value
+ * @method Category            setName()          Sets the current record's "name" value
+ * @method Category            setDescription()   Sets the current record's "description" value
+ * @method Category            setPosts()         Sets the current record's "Posts" collection
+ * @method Category            setPostCategorys() Sets the current record's "PostCategorys" collection
  * 
  * @package    Blog
  * @subpackage model
@@ -31,38 +32,36 @@ abstract class BaseCategory extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('category');
-        $this->hasColumn('id', 'integer', 4, array(
+        $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => true,
              'autoincrement' => true,
-             'length' => 4,
+             'primary' => true,
+             'length' => 8,
              ));
         $this->hasColumn('name', 'string', 150, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
              'notnull' => true,
-             'primary' => false,
-             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('description', 'string', 1000, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
              'notnull' => false,
-             'primary' => false,
-             'autoincrement' => false,
              'length' => 1000,
              ));
+
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('PostCategory', array(
+        $this->hasMany('Post as Posts', array(
+             'refClass' => 'PostCategory',
+             'local' => 'category_id',
+             'foreign' => 'post_id'));
+
+        $this->hasMany('PostCategory as PostCategorys', array(
              'local' => 'id',
              'foreign' => 'category_id'));
     }

@@ -15,7 +15,7 @@ class bicicletasActions extends sfActions {
         $this->formSign = new sfGuardFormSignin();
         $this->categorias = Doctrine::getTable('Tb_CatalogoCategoria')->getAllCatalogoCategoria();
         $this->accesorios = Doctrine::getTable('Tb_CatalogoAccesorios')->getAllCatalogoAccesorio();
-        $this->articulos = Doctrine::getTable('Tb_Articulos')->getAllArticulo();
+        $this->articulos = Doctrine::getTable('Tb_Articulos')->getAllArticuloMoto();
     }
 
     public function executeMenu(sfWebRequest $request) {
@@ -26,7 +26,7 @@ class bicicletasActions extends sfActions {
     }
     public function executeArticulos(sfWebRequest $request) {
 
-        $this->articulos = Doctrine::getTable('Tb_Articulos')->getAllArticulo($request->getParameter('id_categoria'),$request->getParameter('id_accesorio'));
+        $this->articulos = Doctrine::getTable('Tb_Articulos')->getAllArticuloMoto($request->getParameter('id_categoria'),$request->getParameter('id_accesorio'));
     //   die('<pre>'.print_r($this->articulos,1).'</pre>');
         return $this->renderPartial('bicicletas/articulos', array('articulos' => $this->articulos));
         $this->setTemplate('index');

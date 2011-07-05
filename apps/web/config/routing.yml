@@ -5,6 +5,17 @@
 homepage:
   url:   /
   param: { module: dashboard, action: index }
+  
+deletearticulo:
+  url:   /mis_pedidos_articulo_borrado
+  param: { module: pedidos, action: borraArticulo }
+
+enviarpedido:
+  url:   /mis_pedidos_enviado
+  param: { module: pedidos, action: enviarPedido }
+agregaarticulo:
+  url:   /mis_pedidos_agrega_articulo
+  param: { module: pedidos, action: agregaArticulo }
 distribuidores:
   url:   /distribuidores
   param: { module: distribuidores, action: index }
@@ -15,7 +26,7 @@ bicicletas:
   url:   /catalogo_bicicletas
   param: { module: bicicletas, action: index }
 pedidos:
-  url:   /tu_pedido
+  url:   /mis_pedidos
   param: { module: pedidos, action: index }
 sf_guard_signin:
   url:   /login

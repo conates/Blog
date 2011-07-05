@@ -99,6 +99,9 @@ abstract class BaseTb_CatalogoAccesorios extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 20,
              ));
+
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()

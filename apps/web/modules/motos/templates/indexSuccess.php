@@ -1,4 +1,23 @@
+<?php use_helper('I18N', 'Date', 'Url') ?>
+<div id="menu-categorias">
+    <?php include_partial('bicicletas/menu_categorias', array('categorias' => $categorias)) ?>
+</div>
+<div id="menu-accesorios">
+    <?php include_partial('bicicletas/menu_accesorios', array('accesorios' => $accesorios)) ?>
+</div>
+<div id="articulos">
+    <?php include_partial('bicicletas/articulos', array('articulos' => $articulos)) ?>
+</div>
+<script type="text/javascript">
+   
+    $(document).ready(function() {
 
+
+        $('.categoria').click(function() {
+            $('#menu-accesorios').load('bicicletas/menu?id='+$(this).attr("id"));
+        });
+    });
+</script>
 <?php slot('signIn') ?>
 <?php if ($formSign->hasGlobalErrors()): ?>
     <?php echo $formSign->renderGlobalErrors() ?>
@@ -19,4 +38,3 @@
 
 </form>
 <?php end_slot() ?>
-<?php echo link_to(image_tag('catalogo.png'), '@motos')?>

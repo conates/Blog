@@ -7,13 +7,20 @@
         <link rel="shortcut icon" href="/favicon.ico" />
         <?php include_stylesheets() ?>
         <?php include_javascripts() ?>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     </head>
     <body>
         <div id="logo"> 
             <?php echo image_tag('andes.png'); ?>    
         </div>
         <div id="login">
+
+
+            <ul>
+                <li> <?php echo link_to('bicicletas', '@bicicletas') ?></li>
+                <li><?php echo link_to('motos', '@motos') ?></li>
+                <li><?php echo link_to('mis pedidos', '@pedidos') ?></li>
+            </ul>
             <?php if (!$sf_user->isAuthenticated()): ?>
                 <?php if (has_slot('signIn')): ?>
                     <?php include_slot('signIn') ?>
@@ -22,6 +29,7 @@
             <?php if ($sf_user->isAuthenticated()): ?>
                 <li><a class="last logout" href="<?php echo url_for('@sf_guard_signout') ?>">Logout</a></li>
             <?php endif ?>
+
 
         </div>
         <?php echo $sf_content ?>

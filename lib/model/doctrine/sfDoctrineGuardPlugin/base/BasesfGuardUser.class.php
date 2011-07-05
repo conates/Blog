@@ -20,6 +20,7 @@
  * @property Comment $Comment
  * @property Post $Post
  * @property Client $Client
+ * @property Pedido $Pedido
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
@@ -40,6 +41,7 @@
  * @method Comment               getComment()               Returns the current record's "Comment" value
  * @method Post                  getPost()                  Returns the current record's "Post" value
  * @method Client                getClient()                Returns the current record's "Client" value
+ * @method Pedido                getPedido()                Returns the current record's "Pedido" value
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
@@ -59,6 +61,7 @@
  * @method sfGuardUser           setComment()               Sets the current record's "Comment" value
  * @method sfGuardUser           setPost()                  Sets the current record's "Post" value
  * @method sfGuardUser           setClient()                Sets the current record's "Client" value
+ * @method sfGuardUser           setPedido()                Sets the current record's "Pedido" value
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
@@ -128,6 +131,8 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
               0 => 'is_active',
              ),
              ));
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()
@@ -154,6 +159,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasOne('Client', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasOne('Pedido', array(
+             'local' => 'id',
+             'foreign' => 'pedido_id'));
 
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',

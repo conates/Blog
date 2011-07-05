@@ -2,6 +2,11 @@
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
 # default rules
+b_menu:
+  url:      /blog/menu/:tag.html
+  class:    sfDoctrineRoute
+  param:    { module: ViewPost, action: menu }
+  options:  { model: Post, type: object }
 register_success:
   url:   /blog/register_success
   param: { module: Register, action: success }

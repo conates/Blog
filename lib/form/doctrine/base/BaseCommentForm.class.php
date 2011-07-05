@@ -20,11 +20,11 @@ abstract class BaseCommentForm extends BaseFormDoctrine
       'email'      => new sfWidgetFormInputText(),
       'url'        => new sfWidgetFormInputText(),
       'comment'    => new sfWidgetFormTextarea(),
-      'state'      => new sfWidgetFormInputText(),
+      'state'      => new sfWidgetFormChoice(array('choices' => array('Publicado' => 'Publicado', 'Pendiente' => 'Pendiente'))),
       'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => false)),
       'post_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Post'), 'add_empty' => false)),
-      'created_at' => new sfWidgetFormInputText(),
-      'updated_at' => new sfWidgetFormInputText(),
+      'created_at' => new sfWidgetFormDateTime(),
+      'updated_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -33,11 +33,11 @@ abstract class BaseCommentForm extends BaseFormDoctrine
       'email'      => new sfValidatorString(array('max_length' => 150)),
       'url'        => new sfValidatorString(array('max_length' => 150)),
       'comment'    => new sfValidatorString(array('max_length' => 1000)),
-      'state'      => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'state'      => new sfValidatorChoice(array('choices' => array(0 => 'Publicado', 1 => 'Pendiente'), 'required' => false)),
       'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),
       'post_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Post'))),
-      'created_at' => new sfValidatorString(array('max_length' => 19)),
-      'updated_at' => new sfValidatorString(array('max_length' => 19)),
+      'created_at' => new sfValidatorDateTime(),
+      'updated_at' => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('comment[%s]');

@@ -1,17 +1,78 @@
-# # Populate this file with data to be loaded by your ORM's *:data-load task.
-# # You can create multiple files in this directory (i.e. 010_users.yml,
-# # 020_articles.yml, etc) which will be loaded in alphabetical order.
-# # 
-# # See documentation for your ORM's *:data-load task for more information.
-# 
-# User:
-#   fabien:
-#     username: fabien
-#     password: changeme
-#     name:     Fabien Potencier
-#     email:    fabien.potencier@symfony-project.com
-#   kris:
-#     username: Kris.Wallsmith
-#     password: changeme
-#     name:     Kris Wallsmith
-#     email:    kris.wallsmith@symfony-project.com
+sfGuardPermission:
+  sfGuardPermission_1:
+    name: Administrador
+    description: 'tiene todos los privilegios.'
+    created_at: '2011-05-30 15:09:07'
+    updated_at: '2011-05-30 15:09:07'
+  sfGuardPermission_2:
+    name: Editor
+    description: 'Tiene los privilegios del Autor, puede editar y publicar todos los artículo, crear, editar y publicar comentarios, crear y modificar categorías y tags.'
+    created_at: '2011-05-30 15:11:24'
+    updated_at: '2011-05-30 15:11:24'
+  sfGuardPermission_3:
+    name: Autor
+    description: 'Tiene los privilegios del colaborador, puede crear y editar sus artículos, pero no los puede publicar'
+    created_at: '2011-05-30 15:12:31'
+    updated_at: '2011-05-30 15:12:31'
+  sfGuardPermission_4:
+    name: Colaborador
+    description: 'Puede redactar artículos pero no los publica, en Administrar ve sus entradas y los comentarios pero no puede editar, puede actualizar su perfil'
+    created_at: '2011-05-30 15:13:02'
+    updated_at: '2011-05-30 15:13:02'
+  sfGuardPermission_5:
+    name: Cliente
+    description: 'Puede redactar artículos pero no los publica, en Administrar ve sus entradas y los comentarios pero no puede editar, puede actualizar su perfil'
+    created_at: '2011-05-30 15:13:02'
+    updated_at: '2011-05-30 15:13:02'
+sfGuardUserPermission:
+  sfGuardUserPermission_1_1:
+    User: sfGuardUser_1
+    Permission: sfGuardPermission_1
+    created_at: '2011-05-30 15:09:07'
+    updated_at: '2011-05-30 15:09:07'
+sfGuardUser:
+  sfGuardUser_1:
+    first_name: ''
+    last_name: ''
+    email_address: '@'
+    username: admin
+    algorithm: sha1
+    salt: admin
+    password: admin
+    is_active: true
+    is_super_admin: false
+    last_login: '2011-05-30 21:47:09'
+    created_at: '2011-05-25 17:48:06'
+    updated_at: '2011-05-30 21:47:09'
+  sfGuardUser_2:
+    first_name: ''
+    last_name: ''
+    email_address: 'visita@visita.com'
+    username: visita
+    algorithm: sha1
+    salt: visita/visita
+    password: visita/visita
+    is_active: true
+    is_super_admin: false
+    last_login: '2011-05-30 21:47:09'
+Tag:
+  tag_1:
+    name: 'Noticias'
+    description: 'Post que contienen noticias'
+  tag_2:
+    name: 'Fotos'
+    description: 'Post que contienen noticias'
+  tag_3:
+    name: 'Eventos'
+    description: 'Post que contienen noticias'
+  tag_4:
+    name: 'Videos'
+    description: 'Post que contienen noticias'
+  tag_5:
+    name: 'Service Center'
+    description: 'Post que contienen noticias'
+  tag_6:
+    name: 'Productos'
+    description: 'Post que contienen noticias'
+
+    

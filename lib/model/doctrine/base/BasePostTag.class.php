@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('PostTag', 'doctrine');
 
 /**
  * BasePostTag
@@ -31,22 +29,19 @@ abstract class BasePostTag extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('post_tag');
-        $this->hasColumn('post_id', 'integer', 4, array(
+        $this->hasColumn('post_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
              'primary' => true,
-             'autoincrement' => false,
-             'length' => 4,
+             'length' => 8,
              ));
-        $this->hasColumn('tag_id', 'integer', 4, array(
+        $this->hasColumn('tag_id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
              'primary' => true,
-             'autoincrement' => false,
-             'length' => 4,
+             'length' => 8,
              ));
+
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()

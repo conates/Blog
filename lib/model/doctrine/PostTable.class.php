@@ -41,10 +41,18 @@ class PostTable extends Doctrine_Table {
     
     public function getAllPost($search=null) {
         if($search)
-            return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado')->addWhere('title LIKE ?','%'.$search.'%');
+            return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado')->addWhere('title LIKE ?','%'.$search.'%')->orderBy('id desc');
         else
-         return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado');
+         return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado')->orderBy('id desc');
             
     }
-
+    public function getPostUltimate() {
+            return Doctrine_Query::create()->from('Post p')->where('state =?','Publicado')->orderBy('id desc')->limit(10)->execute();
+    }
+    public function getPostPerMes() {
+            return Doctrine_Query::create()->select('distinct(month(p.date)) as mes,year(p.date) as ano')->from('Post p')->where('p.state =?','Publicado')->fetchArray();
+    }
+    public function getPostTag($tag='nada') {
+        return Doctrine_Query::create()->from('Post p')->innerJoin('p.PostTags pt')->innerJoin('pt.Tag t')->where('p.state =?','Publicado')->addWhere('t.name =?',$tag);
+    }
 }

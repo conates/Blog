@@ -5,4 +5,4 @@
 all:
   post:
     content_long: 1000
-    max_page: 10
+    max_page: 3

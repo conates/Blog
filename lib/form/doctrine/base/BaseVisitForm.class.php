@@ -17,14 +17,14 @@ abstract class BaseVisitForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'      => new sfWidgetFormInputHidden(),
       'ip'      => new sfWidgetFormInputText(),
-      'date'    => new sfWidgetFormInputText(),
+      'date'    => new sfWidgetFormDate(),
       'post_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Post'), 'add_empty' => false)),
     ));
 
     $this->setValidators(array(
       'id'      => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'ip'      => new sfValidatorString(array('max_length' => 150)),
-      'date'    => new sfValidatorString(array('max_length' => 10, 'required' => false)),
+      'date'    => new sfValidatorDate(array('required' => false)),
       'post_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Post'))),
     ));
 

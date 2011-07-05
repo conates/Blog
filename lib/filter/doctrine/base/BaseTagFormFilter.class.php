@@ -15,11 +15,13 @@ abstract class BaseTagFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'name'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'description' => new sfWidgetFormFilterInput(),
+      'posts_list'  => new sfWidgetFormDoctrineChoice(array('multiple' => true, 'model' => 'Post')),
     ));
 
     $this->setValidators(array(
       'name'        => new sfValidatorPass(array('required' => false)),
       'description' => new sfValidatorPass(array('required' => false)),
+      'posts_list'  => new sfValidatorDoctrineChoice(array('multiple' => true, 'model' => 'Post', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('tag_filters[%s]');
@@ -29,6 +31,24 @@ abstract class BaseTagFormFilter extends BaseFormFilterDoctrine
     $this->setupInheritance();
 
     parent::setup();
+  }
+
+  public function addPostsListColumnQuery(Doctrine_Query $query, $field, $values)
+  {
+    if (!is_array($values))
+    {
+      $values = array($values);
+    }
+
+    if (!count($values))
+    {
+      return;
+    }
+
+    $query
+      ->leftJoin($query->getRootAlias().'.PostTag PostTag')
+      ->andWhereIn('PostTag.post_id', $values)
+    ;
   }
 
   public function getModelName()
@@ -42,6 +62,7 @@ abstract class BaseTagFormFilter extends BaseFormFilterDoctrine
       'id'          => 'Number',
       'name'        => 'Text',
       'description' => 'Text',
+      'posts_list'  => 'ManyKey',
     );
   }
 }

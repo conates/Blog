@@ -1,367 +1,94 @@
-Category:
-  connection: doctrine
-  tableName: category
-  columns:
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: true
-    name:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    description:
-      type: string(1000)
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-  relations:
-    PostCategory:
-      local: id
-      foreign: category_id
-      type: many
-Client:
-  connection: doctrine
-  tableName: client
-  columns:
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: true
-    first_name:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    last_name:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    email_address:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    address:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    number:
-      type: string(8)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    city:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    commune:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    username:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    password:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    user_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    user_type:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-Comment:
-  connection: doctrine
-  tableName: comment
-  columns:
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: true
-    name:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    email:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    url:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    comment:
-      type: string(1000)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    state:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-    user_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    post_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    created_at:
-      type: string(19)
-      fixed: true
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    updated_at:
-      type: string(19)
-      fixed: true
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-  relations:
-    Post:
-      local: post_id
-      foreign: id
-      type: one
+options:
+  collate: utf8_unicode_ci
+  charset: utf8
+
+
 Post:
-  connection: doctrine
-  tableName: post
+  actAs:
+    Timestampable: ~
+    Searchable: { unique: true, fields: [title,content,state], canUpdate: true }
+    Sluggable:  { unique: true, fields: [title], canUpdate: true }
   columns:
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: true
-    title:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    content:
-      type: string(2147483647)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    date:
-      type: string(19)
-      fixed: true
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    state:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-    user_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-    created_at:
-      type: string(19)
-      fixed: true
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    updated_at:
-      type: string(19)
-      fixed: true
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    slug:
-      type: string(255)
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-  relations:
-    Comment:
-      local: id
-      foreign: post_id
-      type: many
-    PostCategory:
-      local: id
-      foreign: post_id
-      type: many
-    PostIndex:
-      local: id
-      foreign: id
-      type: many
-    PostTag:
-      local: id
-      foreign: post_id
-      type: many
-    Visit:
-      local: id
-      foreign: post_id
-      type: many
+    id:                   { type: integer(8), autoincrement: true, primary: true }
+    title:                { type: string(150), notnull: true }
+    content:              { type: string(50000), notnull: true }
+    date:                 { type: timestamp, notnull: true } 
+    state:                { type: enum, values: ['Publicado','Borrador', 'Pendiente']}
+    user_id:              { type: integer(4), notnull: false }
+  attributes: { export: all,  validate: true }
+
+Comment:
+  actAs:
+    Timestampable: ~
+  columns:
+    id:                   { type: integer(8), autoincrement: true, primary: true }
+    name:                 { type: string(150), notnull: true }
+    email:                { type: string(150), notnull: true }    
+    url:                  { type: string(150), notnull: true }    
+    comment:              { type: string(1000), notnull: true }
+    state:                { type: enum, values: ['Publicado','Pendiente']}
+    user_id:              { type: integer(4), notnull: true }
+    post_id:              { type: integer(8), notnull: true }
+  relations: 
+    Post: { foreignAlias: Comments }
+
+Tag:
+  columns:
+    id:                   { type: integer(8), autoincrement: true, primary: true }
+    name:                 { type: string(150), notnull: true }
+    description:          { type: string(1000), notnull: false }
+  relations: 
+    Posts: { foreignAlias: Tags , class: Post , refClass: PostTag }
+
 PostCategory:
-  connection: doctrine
-  tableName: post_category
   columns:
-    post_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
-    category_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
+    post_id:      { type: integer(8) ,  primary: true }
+    category_id:  { type: integer(8) ,  primary: true }
   relations:
-    Category:
-      local: category_id
-      foreign: id
-      type: one
-    Post:
-      local: post_id
-      foreign: id
-      type: one
-PostIndex:
-  connection: doctrine
-  tableName: post_index
-  columns:
-    keyword:
-      type: string(200)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
-    field:
-      type: string(50)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
-    position:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
-  relations:
-    Post:
-      local: id
-      foreign: id
-      type: one
+    Post:     {   foreignAlias: PostCategorys }
+    Category: {   foreignAlias: PostCategorys }
+
 PostTag:
-  connection: doctrine
-  tableName: post_tag
   columns:
-    post_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
-    tag_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: false
+    post_id:      { type: integer(8) ,  primary: true }
+    tag_id:       { type: integer(8) ,  primary: true }
+  relations:
+    Post:     {   foreignAlias: PostTags }
+    Tag:      {   foreignAlias: PostTags }
+
+
+Category:
+  columns:
+    id:                   { type: integer(8), autoincrement: true, primary: true }
+    name:                 { type: string(150), notnull: true }
+    description:          { type: string(1000), notnull: false }
+  relations:
+    Posts: { foreignAlias: Categories , class: Post , refClass: PostCategory }
+
+Visit:
+  columns:
+    id:            { type: integer(8), autoincrement: true, primary: true }
+    ip:            { type: string(150), notnull: true }
+    date:          { type: date, notnull: false }
+    post_id:       { type: integer(8), notnull: true }
   relations:
     Post:
-      local: post_id
-      foreign: id
-      type: one
-    Tag:
-      local: tag_id
-      foreign: id
-      type: one
+      foreignAlias: Posts
+
+Client:
+  columns:
+    id:               { type: integer(8), autoincrement: true, primary: true }
+    first_name:       { type: string(150), notnull: true }
+    last_name:        { type: string(150), notnull: true }
+    email_address:    { type: string(150), notnull: true }
+    address:          { type: string(150), notnull: true }
+    number:           { type: string(8), notnull: true }
+    city:             { type: string(150), notnull: true }
+    commune:          { type: string(150), notnull: true }
+    username:         { type: string(150), notnull: true }
+    password:         { type: string(150), notnull: true }
+    user_id:          { type: integer(8), notnull: true }
+    user_type:        { type: enum, values: ['Web','Blog', 'Web-Blog']}
 
 sfGuardUser:
   actAs: [Timestampable]
@@ -384,35 +111,8 @@ sfGuardUser:
     Comment:      { local: id ,foreign: user_id , type: one, class: Comment }
     Post:         { local: id ,foreign: user_id , type: one, class: Post }
     Client:       { local: id ,foreign: user_id , type: one, class: Client }
-Tag:
-  connection: doctrine
-  tableName: tag
-  columns:
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: true
-    name:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    description:
-      type: string(1000)
-      fixed: false
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-  relations:
-    PostTag:
-      local: id
-      foreign: tag_id
-      type: many
+    Pedido:       { local: id ,foreign: pedido_id , type: one, class: Pedido }
+
 Tb_ArticuloCategoria:
   connection: doctrine
   tableName: tb_ArticuloCategoria
@@ -782,39 +482,28 @@ Tb_OfertasPorArticulo:
       notnull: false
       primary: false
       autoincrement: false
-Visit:
+
+Pedido:
   connection: doctrine
-  tableName: visit
+  tableName: pedido
   columns:
-    id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      primary: true
-      autoincrement: true
-    ip:
-      type: string(150)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
-    date:
-      type: string(10)
-      fixed: true
-      unsigned: false
-      notnull: false
-      primary: false
-      autoincrement: false
-    post_id:
-      type: integer(4)
-      fixed: false
-      unsigned: false
-      notnull: true
-      primary: false
-      autoincrement: false
+    id: { type: integer(4), fixed: false, unsigned: false, primary: true, autoincrement: true }
+    user_id: { type: integer(4), fixed: false,unsigned: false, notnull: false, primary: false, autoincrement: false}
+    estado: { type: string(255), notnull: true }
+    created_at: { type: string(19), fixed: true, unsigned: false, notnull: true, primary: false, autoincrement: false}
+    updated_at: { type: string(19), fixed: true, unsigned: false, notnull: true, primary: false, autoincrement: false}
   relations:
-    Post:
-      local: post_id
-      foreign: id
-      type: one
+    TbArticulos:
+      foreignAlias: TbArticuloss
+      class: TbArticulos
+      refClass: PedidoTbArticulos
+
+PedidoTbArticulos:
+  columns:
+    tb_articulos_id: { type: string(15), primary: false }
+    pedido_id: { type: integer(4), primary: false }
+  relations:
+    Pedido:
+      foreignAlias: PedidoTbArticulos
+    TbArticulos:
+      foreignAlias: PedidoTbArticulos

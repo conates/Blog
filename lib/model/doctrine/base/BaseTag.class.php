@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('Tag', 'doctrine');
 
 /**
  * BaseTag
@@ -10,16 +8,19 @@ Doctrine_Manager::getInstance()->bindComponent('Tag', 'doctrine');
  * @property integer $id
  * @property string $name
  * @property string $description
- * @property Doctrine_Collection $PostTag
+ * @property Doctrine_Collection $Posts
+ * @property Doctrine_Collection $PostTags
  * 
  * @method integer             getId()          Returns the current record's "id" value
  * @method string              getName()        Returns the current record's "name" value
  * @method string              getDescription() Returns the current record's "description" value
- * @method Doctrine_Collection getPostTag()     Returns the current record's "PostTag" collection
+ * @method Doctrine_Collection getPosts()       Returns the current record's "Posts" collection
+ * @method Doctrine_Collection getPostTags()    Returns the current record's "PostTags" collection
  * @method Tag                 setId()          Sets the current record's "id" value
  * @method Tag                 setName()        Sets the current record's "name" value
  * @method Tag                 setDescription() Sets the current record's "description" value
- * @method Tag                 setPostTag()     Sets the current record's "PostTag" collection
+ * @method Tag                 setPosts()       Sets the current record's "Posts" collection
+ * @method Tag                 setPostTags()    Sets the current record's "PostTags" collection
  * 
  * @package    Blog
  * @subpackage model
@@ -31,38 +32,36 @@ abstract class BaseTag extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('tag');
-        $this->hasColumn('id', 'integer', 4, array(
+        $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'fixed' => 0,
-             'unsigned' => false,
-             'primary' => true,
              'autoincrement' => true,
-             'length' => 4,
+             'primary' => true,
+             'length' => 8,
              ));
         $this->hasColumn('name', 'string', 150, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
              'notnull' => true,
-             'primary' => false,
-             'autoincrement' => false,
              'length' => 150,
              ));
         $this->hasColumn('description', 'string', 1000, array(
              'type' => 'string',
-             'fixed' => 0,
-             'unsigned' => false,
              'notnull' => false,
-             'primary' => false,
-             'autoincrement' => false,
              'length' => 1000,
              ));
+
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
     }
 
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('PostTag', array(
+        $this->hasMany('Post as Posts', array(
+             'refClass' => 'PostTag',
+             'local' => 'tag_id',
+             'foreign' => 'post_id'));
+
+        $this->hasMany('PostTag as PostTags', array(
              'local' => 'id',
              'foreign' => 'tag_id'));
     }

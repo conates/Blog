@@ -26,7 +26,7 @@ abstract class BaseClientForm extends BaseFormDoctrine
       'username'      => new sfWidgetFormInputText(),
       'password'      => new sfWidgetFormInputText(),
       'user_id'       => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => false)),
-      'user_type'     => new sfWidgetFormInputText(),
+      'user_type'     => new sfWidgetFormChoice(array('choices' => array('Web' => 'Web', 'Blog' => 'Blog', 'Web-Blog' => 'Web-Blog'))),
     ));
 
     $this->setValidators(array(
@@ -41,7 +41,7 @@ abstract class BaseClientForm extends BaseFormDoctrine
       'username'      => new sfValidatorString(array('max_length' => 150)),
       'password'      => new sfValidatorString(array('max_length' => 150)),
       'user_id'       => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),
-      'user_type'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'user_type'     => new sfValidatorChoice(array('choices' => array(0 => 'Web', 1 => 'Blog', 2 => 'Web-Blog'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('client[%s]');
