@@ -95,8 +95,7 @@ abstract class BasePost extends sfDoctrineRecord
         $this->setAttribute(Doctrine_Core::ATTR_EXPORT, Doctrine_Core::EXPORT_ALL);
         $this->setAttribute(Doctrine_Core::ATTR_VALIDATE, true);
 
-        $this->option('collate', 'utf8_unicode_ci');
-        $this->option('charset', 'utf8');
+        $this->option('collate', 'SQL_Latin1_General_CP850_CI_AS');
     }
 
     public function setUp()

@@ -24,7 +24,7 @@ class PedidoTable extends Doctrine_Table {
 
         $doctrine = Doctrine_Manager::getInstance()->getCurrentConnection()->getDbh();
         $query = $doctrine->query("
-                    EXEC sp_WEB_ConsultaPedido @Usuario = 3
+                    EXEC sp_WEB_ConsultaPedido @Usuario = ".sfContext::getInstance()->getUser()->getGuardUser()->getId()."
                 ");
         $this->pedidos = $query->fetchAll(PDO::FETCH_ASSOC);
         return $this->pedidos;

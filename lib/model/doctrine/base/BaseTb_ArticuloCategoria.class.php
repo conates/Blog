@@ -75,7 +75,7 @@ abstract class BaseTb_ArticuloCategoria extends sfDoctrineRecord
              'length' => 7,
              ));
 
-        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('collate', 'SQL_Latin1_General_CP850_CI_AS');
         $this->option('charset', 'utf8');
     }
 

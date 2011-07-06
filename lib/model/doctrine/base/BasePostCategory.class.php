@@ -40,8 +40,7 @@ abstract class BasePostCategory extends sfDoctrineRecord
              'length' => 8,
              ));
 
-        $this->option('collate', 'utf8_unicode_ci');
-        $this->option('charset', 'utf8');
+        $this->option('collate', 'SQL_Latin1_General_CP850_CI_AS');
     }
 
     public function setUp()

@@ -8,12 +8,21 @@
                 <tr>
                     <td id="<?php echo $art['IDArticulo1']; ?>">
                         <?php echo $art['NombreWeb1']; ?>
+                        <?php if ($sf_user->isAuthenticated()): ?>
+                            <?php echo link_to(image_tag('shop_cart.png'), '@agregaarticulo?id=' . $art['IDArticulo3']); ?>
+                        <?php endif; ?>
                     </td>
                     <td id="<?php echo $art['IDArticulo2']; ?>">
                         <?php echo $art['NombreWeb2']; ?>
+                        <?php if ($sf_user->isAuthenticated()): ?>
+                            <?php echo link_to(image_tag('shop_cart.png'), '@agregaarticulo?id=' . $art['IDArticulo3']); ?>
+                        <?php endif; ?>
                     </td>
                     <td id="<?php echo $art['IDArticulo3']; ?>">
                         <?php echo $art['NombreWeb3']; ?>
+                        <?php if ($sf_user->isAuthenticated()): ?>
+                            <?php echo link_to(image_tag('shop_cart.png'), '@agregaarticulo?id=' . $art['IDArticulo3']); ?>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endif; ?>
@@ -25,4 +34,3 @@
 <div id="friends">
 
 </div>
-    

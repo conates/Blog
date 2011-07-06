@@ -6,3 +6,31 @@ all:
   post:
     content_long: 1000
     max_page: 3
+
+  contact_form:
+    ## Put here your email address. This email will receive the message from contact form
+    email:         conates.ktn@gmail.com         
+ 
+    ## custom your error message            
+    error:        There is an error. Cannot be sent!  
+ 
+    ## custom your success message
+    notice:       Your message has been sent succefull 
+ 
+    ## captcha error message
+    captcha:      Your secret code is incorrect
+ 
+    ## put here the absolute image path
+    ## example: http://localhost/yourproject/web/index.php/contact/image
+    image_path:   http://shimano.localhost/index.php/blog/contact/image
+ 
+    ## legend your form
+    legend:       Please, fill the fields and send us a message  
+ 
+    ## change fields labels
+    field_name:     Your Name
+    field_email:    Your Email
+    field_subject:  Your Subject
+    field_message:  Your Message
+    field_captcha:  Security Code
+    button:         Send Message

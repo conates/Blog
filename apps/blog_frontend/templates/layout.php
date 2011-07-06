@@ -24,7 +24,7 @@
                         <li> <?php echo link_to('VIDEOS','@b_menu?tag=Videos')?></li>
                         <li> <?php echo link_to('SERVICE CENTER','@b_menu?tag=Service Center')?></li>
                         <li> <?php echo link_to('PRODUCTOS','@b_menu?tag=Productos')?></li>
-
+                        <li> <?php echo link_to('CONTACTO','@contact')?></li>
                     </ul>
                     <div id="buscador">
                         <label>buscador: </label>

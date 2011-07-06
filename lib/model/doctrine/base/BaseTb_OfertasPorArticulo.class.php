@@ -113,7 +113,7 @@ abstract class BaseTb_OfertasPorArticulo extends sfDoctrineRecord
              'length' => 15,
              ));
 
-        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('collate', 'SQL_Latin1_General_CP850_CI_AS');
         $this->option('charset', 'utf8');
     }
 
